@@ -2,8 +2,6 @@ import React from 'react'
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
     Textarea,
     Flex
@@ -40,8 +38,6 @@ export default function(){
             return !formData.description ? {...prevIsError, description: true} : {...prevIsError, description: false}
         })
     },[formData.description])
-
-    const ErrorTitleText = isError.title ? 'Name cannot be empty' : 'Enter Collection Name'
 
     return(
         <form>
