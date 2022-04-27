@@ -1,12 +1,26 @@
 import React from "react";
 
-import { Flex, Text, HStack, Button, Link } from "@chakra-ui/react";
+import { Flex, Text, HStack, Button } from "@chakra-ui/react";
 
 import { AddIcon, ViewIcon } from "@chakra-ui/icons";
 
 import { Link as RouterLink } from "react-router-dom";
 
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure
+  } from '@chakra-ui/react'
+
 export default function Home() {
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     return (
         <Flex
             justifyContent={"center"}
@@ -28,16 +42,33 @@ export default function Home() {
                     Welcome to <span style={{ color: "#39c0ba" }}> Image Gallery </span>
                 </Text>
                 <HStack spacing={"50px"} marginTop={"30px"}>
-                    <RouterLink to="/AddCollection">
-                        <Button colorScheme={"teal"} size={"lg"} leftIcon={<AddIcon />}>
-                            Add Collection
-                        </Button>
-                    </RouterLink>
+                    <Button colorScheme={"teal"} size={"lg"} leftIcon={<AddIcon />} onClick={onOpen}>
+                        Add Collection
+                    </Button>
+
+                    <Modal isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader>Add Collection</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+
+                            </ModalBody>
+                            <ModalFooter>
+                            <Button colorScheme={"teal"} size={"lg"}>
+                                Add
+                            </Button>
+                            <Button colorScheme={"teal"} size={"lg"} variant={'ghost'} onClick={onClose}>
+                                Close
+                            </Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
 
                     <RouterLink to="/ViewCollection">
-                    <Button colorScheme={"teal"} size={"lg"} leftIcon={<ViewIcon />}>
-                        View Collections
-                    </Button>
+                        <Button colorScheme={"teal"} size={"lg"} leftIcon={<ViewIcon />}>
+                            View Collections
+                        </Button>
                     </RouterLink>
                 </HStack>
             </Flex>

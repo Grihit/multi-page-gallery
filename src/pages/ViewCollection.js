@@ -1,14 +1,10 @@
 import React from 'react'
-import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-} from '@chakra-ui/react'
+import Navbar from '../components/Navbar'
 
 export default function ViewCollection(){
     return(
         <div>
+            <Navbar />
             Hello 
         </div>
     )

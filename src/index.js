@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react'
-import AddCollection from './pages/AddCollection';
 import ViewCollection from './pages/ViewCollection';
 
 import {
@@ -19,8 +18,7 @@ const routing = (
   <ChakraProvider>  
     <Router>  
       <Routes>   
-        <Route exact path="/" element={<App />} />  
-        <Route path="/AddCollection" element={<AddCollection />} />    
+        <Route exact path="/" element={<App />} />     
         <Route path="/ViewCollection" element={<ViewCollection />} />    
       </Routes>  
     </Router>  

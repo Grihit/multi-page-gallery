@@ -6,10 +6,10 @@ import {
     FormHelperText,
 } from '@chakra-ui/react'
 
-export default function AddCollection(){
+export default function(){
     return(
-        <div>
-            Hello 
-        </div>
+        <FormControl>
+            
+        </FormControl>
     )
 }
