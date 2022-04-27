@@ -50,7 +50,7 @@ export default function Home() {
                     <Modal isOpen={isOpen} onClose={onClose} size={'2xl'}>
                         <ModalOverlay />
                         <ModalContent>
-                            <ModalHeader>Add Collection</ModalHeader>
+                            <ModalHeader fontSize={'2xl'} color={'#39c0ba'}>Add Collection</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
                                 <AddCollectionForm />

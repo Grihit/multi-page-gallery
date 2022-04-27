@@ -5,6 +5,7 @@ import {
     FormErrorMessage,
     FormHelperText,
     Input,
+    Textarea,
     Flex
 } from '@chakra-ui/react'
 
@@ -34,12 +35,17 @@ export default function(){
             return !formData.title ? {...prevIsError, title: true} : {...prevIsError, title: false}
         })
     },[formData.title])
+    React.useEffect(() => {
+        setIsError(prevIsError => {
+            return !formData.description ? {...prevIsError, description: true} : {...prevIsError, description: false}
+        })
+    },[formData.description])
 
     const ErrorTitleText = isError.title ? 'Name cannot be empty' : 'Enter Collection Name'
 
     return(
         <form>
-            <FormControl isInvalid={isError.title}>
+            <FormControl isInvalid={isError.title} marginBottom={'10px'}>
                 <Flex alignItems={'center'}>
                     <FormLabel htmlFor='title' fontSize={'2xl'} minW={'150px'}>Name: </FormLabel>
                     <Input
@@ -54,10 +60,9 @@ export default function(){
             <FormControl isInvalid={isError.description}>
                 <Flex alignItems={'center'}>
                     <FormLabel htmlFor='description' fontSize={'2xl'} minW={'150px'}>Description: </FormLabel>
-                    <Input
-                        type={'text'}
+                    <Textarea
                         name={'description'}
-                        placeholder={'Enter Colllection Name'}
+                        placeholder={'Enter Colllection Description'}
                         value={formData.description}
                         onChange={handleInputChange}
                     />
