@@ -5,7 +5,7 @@ import {
     Link
 } from '@chakra-ui/react'
 import {
-    Link as ReachLink, 
+    Link as RouterLink, 
     BrowserRouter as Router
 } from "react-router-dom"
 
@@ -23,11 +23,7 @@ export default function Navbar() {
             boxShadow={'md'}
             paddingLeft={'20px'}
         >
-            <Router>
-                <Link as={ReachLink} to='/'>
-                    <img src="https://www.disecto.com/static/media/logo.244765c6.svg" />
-                </Link>
-            </Router>    
+            <img src="https://www.disecto.com/static/media/logo.244765c6.svg" />  
         </Flex>
     </Box>
   );

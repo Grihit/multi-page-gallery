@@ -4,13 +4,29 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react'
+import AddCollection from './pages/AddCollection';
+import ViewCollection from './pages/ViewCollection';
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <ChakraProvider>
-      <App />
+const routing = (
+  <ChakraProvider>  
+    <Router>  
+      <Routes>   
+        <Route exact path="/" element={<App />} />  
+        <Route path="/AddCollection" element={<AddCollection />} />    
+        <Route path="/ViewCollection" element={<ViewCollection />} />    
+      </Routes>  
+    </Router>  
   </ChakraProvider>
-);
+)  
+root.render(routing)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
