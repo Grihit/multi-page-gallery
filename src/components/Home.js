@@ -1,4 +1,5 @@
 import React from "react";
+import AddCollectionForm from "./AddCollectionForm";
 
 import { Flex, Text, HStack, Button } from "@chakra-ui/react";
 
@@ -46,13 +47,13 @@ export default function Home() {
                         Add Collection
                     </Button>
 
-                    <Modal isOpen={isOpen} onClose={onClose}>
+                    <Modal isOpen={isOpen} onClose={onClose} size={'2xl'}>
                         <ModalOverlay />
                         <ModalContent>
                             <ModalHeader>Add Collection</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
-
+                                <AddCollectionForm />
                             </ModalBody>
                             <ModalFooter>
                             <Button colorScheme={"teal"} size={"lg"}>
