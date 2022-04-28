@@ -80,20 +80,21 @@ export default function AddCollectionForm(props) {
                     <FormLabel htmlFor='description' fontSize={'2xl'} minW={'150px'}>Description: </FormLabel>
                     <Textarea
                         name={'description'}
-                        placeholder={'Enter Colllection Description'}
+                        placeholder={'Enter Collection Description'}
                         value={formData.description}
                         onChange={handleInputChange}
                     />
                 </Flex>
             </FormControl>
-            <Flex justifyContent={'flex-end'}>
-                {errorMsg && <Text color={'red.400'} fontSize={'lg'} margin={0}>*{errorMsg}</Text>}
-            </Flex>
+            
             <Flex justifyContent={'center'} marginTop={'10px'}>
                 <UploadImage fileList={images} setFileList={setImages} />
             </Flex>
-            <ModalFooter>
-                <Button colorScheme={"teal"} size={"lg"} type={'submit'} >
+            <ModalFooter justifyContent={'flex-start'} pl={0} pr={0}>
+            <Flex>
+                {errorMsg && <Text color={'red.400'} fontSize={'xl'} margin={0}>*{errorMsg}</Text>}
+            </Flex>
+                <Button colorScheme={"teal"} size={"lg"} type={'submit'} marginLeft={'auto'}>
                     Add
                 </Button>
                 <Button colorScheme={"teal"} size={"lg"} variant={'ghost'} onClick={props.close}>
