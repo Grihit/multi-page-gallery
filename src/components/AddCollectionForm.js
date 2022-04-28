@@ -49,7 +49,6 @@ export default function AddCollectionForm(props) {
     }, [formData.description])
 
     function formSubmit(event) {
-        console.log("here")
         event.preventDefault()
         if (isError.title)
             setErrorMsg('Collection name is required')
@@ -87,10 +86,12 @@ export default function AddCollectionForm(props) {
                     />
                 </Flex>
             </FormControl>
+            <Flex justifyContent={'flex-end'}>
+                {errorMsg && <Text color={'red.400'} fontSize={'lg'} margin={0}>*{errorMsg}</Text>}
+            </Flex>
             <Flex justifyContent={'center'} marginTop={'10px'}>
                 <UploadImage fileList={images} setFileList={setImages} />
             </Flex>
-            {errorMsg && <Text>{errorMsg}</Text>}
             <ModalFooter>
                 <Button colorScheme={"teal"} size={"lg"} type={'submit'} >
                     Add

@@ -17,11 +17,7 @@ function beforeUpload(file) {
     if (!isJpgOrPng) {
         message.error({content: 'You can only upload JPG/PNG file!', style: {zIndex: '2000'}});
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-        message.error({content: 'Image must smaller than 2MB!', style: {zIndex: '2000'}});
-    }
-    return isJpgOrPng && isLt2M;
+    return isJpgOrPng;
 }
 
 const UploadImage = ({ fileList, setFileList }) => {
