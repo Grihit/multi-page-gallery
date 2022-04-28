@@ -12,7 +12,6 @@ import {
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure
@@ -53,16 +52,8 @@ export default function Home() {
                             <ModalHeader fontSize={'2xl'} color={'#39c0ba'}>Add Collection</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
-                                <AddCollectionForm />
+                                <AddCollectionForm close={onClose}/>
                             </ModalBody>
-                            <ModalFooter>
-                            <Button colorScheme={"teal"} size={"lg"}>
-                                Add
-                            </Button>
-                            <Button colorScheme={"teal"} size={"lg"} variant={'ghost'} onClick={onClose}>
-                                Close
-                            </Button>
-                            </ModalFooter>
                         </ModalContent>
                     </Modal>
 
