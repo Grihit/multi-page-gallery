@@ -64,7 +64,7 @@ const UploadImage = ({ fileList, setFileList }) => {
       >
         {uploadButton}
       </Upload>
-      {errMsg && <div className="img--error">{errMsg}</div>}
+      {errMsg && <div>{errMsg}</div>}
       <Modal
         visible={previewVisible}
         title={previewTitle}
@@ -72,7 +72,7 @@ const UploadImage = ({ fileList, setFileList }) => {
         onCancel={() => setPreviewVisible(false)}
         zIndex={"2000"}
       >
-        <img alt="example" style={{ width: "100%" }} src={previewImage} />
+        <img alt="uploaded" style={{ width: "100%" }} src={previewImage} />
       </Modal>
     </div>
   );

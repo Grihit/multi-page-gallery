@@ -1,0 +1,2 @@
+
+export const ADD_COLLECTION = 'ADD_COLLECTION';

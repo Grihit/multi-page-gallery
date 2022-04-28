@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react'
 import ViewCollection from './pages/ViewCollection';
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import reducer from './store/reducer'
 
 import {
   BrowserRouter as Router,
@@ -12,17 +15,55 @@ import {
   Route
 } from 'react-router-dom'
 
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if(serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (e) {
+    console.log("Others");
+    return undefined;
+  }
+};
+
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (e) {
+    console.log("Storage errors");
+  }
+};
+
+const persistedState = loadState();
+
+const store = createStore(
+  // persistedState,
+  reducer,
+  persistedState
+);
+
+store.subscribe(() => {
+  saveState({
+  	collections:store.getState().collections,
+  });
+});
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const routing = (
-  <ChakraProvider>  
-    <Router>  
-      <Routes>   
-        <Route exact path="/" element={<App />} />     
-        <Route path="/ViewCollection" element={<ViewCollection />} />    
-      </Routes>  
-    </Router>  
-  </ChakraProvider>
+  <Provider store={store}>
+    <ChakraProvider>  
+      <Router>  
+        <Routes>   
+          <Route exact path="/" element={<App />} />     
+          <Route path="/ViewCollection" element={<ViewCollection />} />    
+        </Routes>  
+      </Router>  
+    </ChakraProvider>
+  </Provider>
 )  
 root.render(routing)
 

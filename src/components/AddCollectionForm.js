@@ -10,8 +10,11 @@ import {
     ModalFooter
 } from '@chakra-ui/react'
 import UploadImage from './UploadImage'
+import { useDispatch } from 'react-redux'
+import * as actionTypes from '../store/actions'
 
 export default function AddCollectionForm(props) {
+    const dispatch = useDispatch();
 
     const [formData, setFormData] = React.useState({
         title: "",
@@ -24,7 +27,7 @@ export default function AddCollectionForm(props) {
 
     const [errorMsg, setErrorMsg] = React.useState('')
 
-    const [images, setImages] = React.useState([])
+    const [FormImages, setFormImages] = React.useState([])
 
     function handleInputChange(event) {
         const { name, value } = event.target
@@ -53,10 +56,22 @@ export default function AddCollectionForm(props) {
             setErrorMsg('Collection name is required')
         else if (isError.description)
             setErrorMsg('Collection description is required')
-        else if (images.length < 1)
+        else if (FormImages.length < 1)
             setErrorMsg('No Image Uploaded')
         else
             setErrorMsg('')
+        if(!isError.title && !isError.description){
+            const collection = {
+                title: formData.title,
+                description: formData.description,
+                Images: FormImages
+
+            }
+            dispatch({
+                type: actionTypes.ADD_COLLECTION,
+                collection: collection,
+              });
+        }
 
     }
 
@@ -87,7 +102,7 @@ export default function AddCollectionForm(props) {
             </FormControl>
             
             <Flex justifyContent={'center'} margin={'15px 0px'}>
-                <UploadImage fileList={images} setFileList={setImages} />
+                <UploadImage fileList={FormImages} setFileList={setFormImages} />
             </Flex>
             <ModalFooter justifyContent={'flex-start'} pl={0} pr={0}>
             <Flex>

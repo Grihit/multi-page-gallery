@@ -1,11 +1,14 @@
-import React from "react";
+import React from "react"
 import {
     Flex,
     Box,
     Text
 } from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function Sidebar(){
+    const collections = useSelector(state => state.collections)
+    console.log(collections)
     return(
         <Flex 
             minH={'calc(100vh - 80px)'} 
