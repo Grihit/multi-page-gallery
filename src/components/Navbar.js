@@ -11,14 +11,11 @@ export default function Navbar() {
   return (
     <Box>
         <Flex 
-            bg={'gray.100'} 
+            bg={'gray.50'} 
             w={'full'} 
             minH={'80px'}
             alignItems={'center'}
-            borderBottom={1}
-            borderStyle={'solid'}
-            borderColor={'gray.300'}
-            boxShadow={'md'}
+            boxShadow={'0px 15px 34px -19px rgba(57,192,186,0.3)'}
             paddingLeft={'20px'}
         >
             <RouterLink to="/">

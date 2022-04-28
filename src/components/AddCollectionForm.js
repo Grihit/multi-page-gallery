@@ -2,7 +2,6 @@ import React from 'react'
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
     Input,
     Textarea,
     Flex,
@@ -87,7 +86,7 @@ export default function AddCollectionForm(props) {
                 </Flex>
             </FormControl>
             
-            <Flex justifyContent={'center'} marginTop={'10px'}>
+            <Flex justifyContent={'center'} margin={'15px 0px'}>
                 <UploadImage fileList={images} setFileList={setImages} />
             </Flex>
             <ModalFooter justifyContent={'flex-start'} pl={0} pr={0}>
