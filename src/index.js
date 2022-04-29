@@ -48,6 +48,7 @@ const store = createStore(
 store.subscribe(() => {
   saveState({
   	collections:store.getState().collections,
+    currentCollection:store.getState().currentCollection, 
   });
 });
 

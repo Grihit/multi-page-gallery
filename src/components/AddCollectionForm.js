@@ -13,7 +13,7 @@ import UploadImage from "./UploadImage";
 import { useDispatch } from "react-redux";
 import * as actionTypes from "../store/actions";
 import { nanoid } from "nanoid";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function AddCollectionForm(props) {
   const dispatch = useDispatch();
@@ -72,14 +72,15 @@ export default function AddCollectionForm(props) {
         Images: FormImages,
       };
       dispatch({
+        type: actionTypes.CURRENT_COLLECTION,
+        currentCollection: collection,
+      });
+      dispatch({
         type: actionTypes.ADD_COLLECTION,
         collection: collection,
       });
-      dispatch({
-          type: actionTypes.CURRENT_COLLECTION,
-          currentCollection: collection,
-      })
-      navigate('/viewCollection')
+
+      navigate("/viewCollection");
     }
   }
 
@@ -131,7 +132,7 @@ export default function AddCollectionForm(props) {
           marginLeft={"auto"}
           onClick={
             !isError.title && !isError.description
-              ? (props.close)
+              ? props.close
               : () => void undefined
           }
         >

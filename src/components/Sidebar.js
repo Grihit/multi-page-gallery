@@ -1,9 +1,20 @@
 import React from "react";
 import { Flex, Text, Tab, Tabs, TabList } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import * as actionTypes from "../store/actions";
 
 export default function Sidebar(props) {
   const collections = useSelector((state) => state.collections);
+    const dispatch = useDispatch()
+
+    function handleClick(collection){
+        dispatch({
+            type: actionTypes.CURRENT_COLLECTION,
+            currentCollection: collection,
+        })
+    }
+    
+
   const collectionElements = collections.map((collection) => {
     return <Tab
       justifyContent={"flex-start"}
@@ -12,7 +23,7 @@ export default function Sidebar(props) {
       wordBreak={'break-all'}
       _selected={{ color: "#FFFFFF", bg: "#39c0ba"}}
       key={collection.key}
-      onClick={() => props.setCurrentCollectionKey(collection.key)}
+      onClick={() => handleClick(collection)}
       >
           {collection.title}
     </Tab>

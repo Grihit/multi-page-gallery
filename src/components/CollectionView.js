@@ -2,18 +2,21 @@ import React from "react"
 import {Flex, Text, Grid, GridItem, Img, Input, IconButton} from '@chakra-ui/react'
 import {CheckIcon, EditIcon} from '@chakra-ui/icons'
 import { nanoid } from "nanoid"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as actionTypes from "../store/actions";
 
-export default function CollectionView(props){
+export default function CollectionView(){
     const dispatch = useDispatch();
-    const collection = props.collection
-
-    const imgElements = collection.Images.map(img => {
-        return <GridItem key={nanoid()}>
-            <Img src={img.thumbUrl} alt={img.name} w={'full'}/>
-        </GridItem>
-    })
+    // const collections = useSelector(state => state.collections)
+    const collection = useSelector(state => state.currentCollection)
+    const [imgElements, setImgElements] = React.useState('')
+    React.useEffect(()=>{
+        setImgElements(collection.Images.map(img => {
+            return <GridItem key={nanoid()}>
+                <Img src={img.thumbUrl} alt={img.name} w={'full'}/>
+            </GridItem>
+        }))
+    }, [collection])
 
     const [newCollection, setNewCollection] = React.useState(collection)
     const [editCollection, setEditCollection] = React.useState({
