@@ -40,6 +40,18 @@ const reducer = (state = initialState, action) => {
       }
 
     }
+    case actionTypes.DELETE_IMAGE: {
+      let newCollections = state.collections
+      const imgIndex = action.imgIndex
+      const collectionIndex = action.collectionIndex
+      newCollections[collectionIndex].Images.splice(imgIndex,1)
+      console.log(newCollections)
+      return{
+        ...state,
+        currentCollection: newCollections[collectionIndex],
+        collections: newCollections,
+      }
+    }
     default:
       return state;
   }

@@ -17,7 +17,7 @@ import {
   ModalFooter,
   Button,
 } from "@chakra-ui/react";
-import { CheckIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
+import { CheckIcon, EditIcon, AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionTypes from "../store/actions";
@@ -31,18 +31,62 @@ export default function CollectionView() {
   const collection = useSelector((state) => state.currentCollection);
   const [imgElements, setImgElements] = React.useState("");
   const [newImages, setNewImages] = React.useState([]);
+  const [imgHover, setImgHover] = React.useState("");
+  function hoverToggle(imgIndex) {
+    setImgHover(imgIndex);
+  }
+  function imgDelete(imgIndex) {
+    const collectionIndex = collections.indexOf(collection);
+    if(collection.Images.length <= 1){
+        message.error('Collection must have atleast 1 image!')
+        return
+    }
+    message.success('Deleting Image')
+    dispatch({
+      type: actionTypes.DELETE_IMAGE,
+      imgIndex: imgIndex,
+      collectionIndex: collectionIndex,
+    });
+  }
   React.useEffect(() => {
     setImgElements(
-      collection.Images.map((img,imgIndex) => {
+      collection.Images.map((img, imgIndex) => {
         return (
-          <GridItem key={nanoid()} w={'100%'}>
-            <Image src={img.thumbUrl} alt={img.name} w={"full"} objectFit={'cover'} h={'full'} />
+          <GridItem
+            key={nanoid()}
+            w={"100%"}
+            pos={"relative"}
+            onMouseEnter={() => hoverToggle(imgIndex)}
+            onMouseLeave={() => hoverToggle("")}
+          >
+            <Image
+              src={img.thumbUrl}
+              alt={img.name}
+              w={"full"}
+              objectFit={"cover"}
+              h={"full"}
+              cursor={"pointer"}
+            />
+            {imgHover === imgIndex && (
+              <DeleteIcon
+                bg={"rgba(64, 206, 199, 0.764)"}
+                color={"#FFFFFF"}
+                w={7}
+                h={7}
+                p={"3px"}
+                pos={"absolute"}
+                top={"2px"}
+                right={"2px"}
+                onClick={() => imgDelete(imgIndex)}
+                cursor={'pointer'}
+              />
+            )}
           </GridItem>
         );
       })
     );
     setNewCollection(collection);
-  }, [collection, collections]);
+  }, [collection, collections, imgHover]);
 
   const [newCollection, setNewCollection] = React.useState(collection);
   const [editCollection, setEditCollection] = React.useState({
@@ -85,20 +129,19 @@ export default function CollectionView() {
     const index = collections.indexOf(collection);
     if (
       newCollection.title.length < 1 ||
-      newCollection.description.length < 1 ||
-      newCollection.Images.length < 1
+      newCollection.description.length < 1
     ) {
       message.error(
-        "Make sure Collection name, description and images are not empty"
+        "Collection's name and description cannot empty!"
       );
       return;
     }
     const updatedNewCollection = {
-        ...newCollection,
-        Images: newCollection.Images.concat(newImages)
-    }
-    setNewCollection(updatedNewCollection)
-    setNewImages([])
+      ...newCollection,
+      Images: newCollection.Images.concat(newImages),
+    };
+    setNewCollection(updatedNewCollection);
+    setNewImages([]);
     dispatch({
       type: actionTypes.EDIT_COLLECTION,
       index: index,
@@ -106,6 +149,7 @@ export default function CollectionView() {
       description: updatedNewCollection.description,
       Images: updatedNewCollection.Images,
     });
+    onClose()
   }
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -184,6 +228,7 @@ export default function CollectionView() {
               placeholder={"Enter New Collection Description"}
               value={newCollection.description}
               onChange={handleInputChange}
+              marginBottom={"20px"}
             ></Input>
             <IconButton
               icon={<CheckIcon />}
@@ -199,10 +244,10 @@ export default function CollectionView() {
           size={"md"}
           leftIcon={<AddIcon />}
           onClick={onOpen}
-          w={'150px'}
-          minH={'40px'}
-          marginLeft={'auto'}
-          marginRight={'30px'}
+          w={"150px"}
+          minH={"40px"}
+          marginLeft={"auto"}
+          marginRight={"30px"}
         >
           Add Images
         </Button>
