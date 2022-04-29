@@ -47,12 +47,6 @@ export default function Sidebar(props) {
           {collectionElements}
         </TabList>
       </Tabs>
-      {/* <Tab p={'15px'} m={''} cursor={'pointer'} _selected={{color: 'gray'}} >
-                <Text fontSize={'1.5rem'}>Collection 1</Text>
-            </Tab>
-            <Box p={'15px'} m={''} cursor={'pointer'}>
-                <Text fontSize={'1.5rem'}>Collection 2</Text>
-            </Box> */}
     </Flex>
   );
 }

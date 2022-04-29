@@ -14,7 +14,7 @@ export default function ViewCollection() {
     const collection = useSelector(state => state.currentCollection)
 
     const [index,setIndex] = React.useState(collections.indexOf(collection))
-    const [currentCollectionKey, setCurrentCollectionKey] = React.useState(collection.key || collections[0].key)
+    const [currentCollectionKey, setCurrentCollectionKey] = React.useState(collection? collection.key : collections[0].key)
     const [currentCollection, setCurrentCollection] = React.useState(collection || collections[0])
 
     React.useEffect(() => {

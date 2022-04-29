@@ -24,6 +24,28 @@ const reducer = (state = initialState, action) => {
         currentCollection,
       }
     }
+    case actionTypes.EDIT_COLLECTION: {
+      let newCollections = state.collections;
+      let currentCollection = state.collection
+      const prevCollection = newCollections.find(c => {
+        return c.key === action.key
+      })
+      const index = newCollections.indexOf(prevCollection)
+      newCollections[index] = {
+        ...newCollections,
+        title: action.title,
+        description: action.description,
+        Images: action.Images,
+
+      }
+      currentCollection = newCollections[index]
+      return {
+        ...state,
+        currentCollection,
+        newCollections,
+      }
+
+    }
     default:
       return state;
   }
