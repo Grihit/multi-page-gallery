@@ -1,35 +1,43 @@
-import React from "react"
-import {
-    Flex,
-    Box,
-    Text
-} from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
+import React from "react";
+import { Flex, Text, Tab, Tabs, TabList } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
-export default function Sidebar(){
-    const collections = useSelector(state => state.collections)
-    console.log(collections)
-    return(
-        <Flex 
-            minH={'calc(100vh - 80px)'} 
-            overflowY={'auto'} 
-            maxW={'20vw'}
-            boxShadow={'15px 0px 34px -19px rgba(57,192,186,0.2)'}
-            flexDir={'column'}
-        >
-            <Text  
-                p={'15px'} 
-                fontSize={'2.5rem'} 
-                fontWeight={'700'}
-            >
-                Collections
-            </Text>
-            <Box p={'15px'} m={''} cursor={'pointer'}>
+export default function Sidebar(props) {
+  const collections = useSelector((state) => state.collections);
+  const collectionElements = collections.map((collection) => {
+    return <Tab
+      justifyContent={"flex-start"}
+      fontSize={"1.75vw"}
+      fontWeight={"500"}
+      _selected={{ color: "black", bg: "#39c0ba", opacity: "0.75" }}
+      key={collection.key}
+      onClick={() => props.setCurrentCollectionKey(collection.key)}
+      >
+          {collection.title}
+    </Tab>
+  });
+  return (
+    <Flex
+      minH={"calc(100vh - 80px)"}
+      overflowY={"auto"}
+      maxW={"20vw"}
+      boxShadow={"15px 0px 34px -19px rgba(57,192,186,0.2)"}
+      flexDir={"column"}
+    >
+      <Text p={"15px"} fontSize={"2.5vw"} fontWeight={"700"}>
+        Collections
+      </Text>
+      <Tabs orientation={"vertical"}>
+        <TabList width={"full"}>
+          {collectionElements}
+        </TabList>
+      </Tabs>
+      {/* <Tab p={'15px'} m={''} cursor={'pointer'} _selected={{color: 'gray'}} >
                 <Text fontSize={'1.5rem'}>Collection 1</Text>
-            </Box>
+            </Tab>
             <Box p={'15px'} m={''} cursor={'pointer'}>
                 <Text fontSize={'1.5rem'}>Collection 2</Text>
-            </Box>
-        </Flex>
-    )
+            </Box> */}
+    </Flex>
+  );
 }
