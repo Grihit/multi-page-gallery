@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
+import CollectionView from '../components/CollectionView'
+import { Flex } from '@chakra-ui/react'
 import { useSelector } from 'react-redux/'
 
 export default function ViewCollection() {
@@ -14,12 +16,13 @@ export default function ViewCollection() {
         })
         setCurrentCollection(newCurrentCollection)
     },[currentCollectionKey, collections])
-    
-    console.log(currentCollection)
     return (
         <div>
             <Navbar />
+            <Flex>
             <Sidebar setCurrentCollectionKey={setCurrentCollectionKey}/>
+            <CollectionView collection={currentCollection} />
+            </Flex>
         </div>
     )
 }

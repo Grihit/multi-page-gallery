@@ -7,9 +7,10 @@ export default function Sidebar(props) {
   const collectionElements = collections.map((collection) => {
     return <Tab
       justifyContent={"flex-start"}
-      fontSize={"1.75vw"}
-      fontWeight={"500"}
-      _selected={{ color: "black", bg: "#39c0ba", opacity: "0.75" }}
+      fontSize={"1.2vw"}
+      textAlign={'left'}
+      wordBreak={'break-all'}
+      _selected={{ color: "#FFFFFF", bg: "#39c0ba"}}
       key={collection.key}
       onClick={() => props.setCurrentCollectionKey(collection.key)}
       >
@@ -20,11 +21,12 @@ export default function Sidebar(props) {
     <Flex
       minH={"calc(100vh - 80px)"}
       overflowY={"auto"}
-      maxW={"20vw"}
+      minW={"17vw"}
+      maxW={'20vw'}
       boxShadow={"15px 0px 34px -19px rgba(57,192,186,0.2)"}
       flexDir={"column"}
     >
-      <Text p={"15px"} fontSize={"2.5vw"} fontWeight={"700"}>
+      <Text p={"15px"} fontSize={"1.6vw"} fontWeight={"500"}>
         Collections
       </Text>
       <Tabs orientation={"vertical"}>
