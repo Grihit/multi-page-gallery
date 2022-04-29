@@ -4,7 +4,7 @@ import {
     Box,
     Text
 } from '@chakra-ui/react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 export default function Sidebar(){
     const collections = useSelector(state => state.collections)

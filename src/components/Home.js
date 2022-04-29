@@ -17,8 +17,11 @@ import {
     useDisclosure
   } from '@chakra-ui/react'
 
+  import { useSelector } from 'react-redux'
+
 export default function Home() {
 
+    const collections = useSelector(state => state.collections)
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
@@ -58,7 +61,7 @@ export default function Home() {
                     </Modal>
 
                     <RouterLink to="/ViewCollection">
-                        <Button colorScheme={"teal"} size={"lg"} leftIcon={<ViewIcon />}>
+                        <Button colorScheme={"teal"} size={"lg"} leftIcon={<ViewIcon />} isDisabled={collections.length<1}>
                             View Collections
                         </Button>
                     </RouterLink>

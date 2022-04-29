@@ -110,7 +110,12 @@ export default function AddCollectionForm(props) {
             <Flex>
                 {errorMsg && <Text color={'red.400'} fontSize={'xl'} margin={0}>*{errorMsg}</Text>}
             </Flex>
-                <Button colorScheme={"teal"} size={"lg"} type={'submit'} marginLeft={'auto'}>
+                <Button 
+                    colorScheme={"teal"} 
+                    size={"lg"} type={'submit'} 
+                    marginLeft={'auto'} 
+                    onClick={!isError.title && !isError.description ? props.close : () => void undefined}
+                >
                     Add
                 </Button>
                 <Button colorScheme={"teal"} size={"lg"} variant={'ghost'} onClick={props.close}>
