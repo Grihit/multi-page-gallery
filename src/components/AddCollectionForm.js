@@ -12,6 +12,7 @@ import {
 import UploadImage from './UploadImage'
 import { useDispatch } from 'react-redux'
 import * as actionTypes from '../store/actions'
+import { nanoid } from 'nanoid'
 
 export default function AddCollectionForm(props) {
     const dispatch = useDispatch();
@@ -62,6 +63,7 @@ export default function AddCollectionForm(props) {
             setErrorMsg('')
         if(!isError.title && !isError.description){
             const collection = {
+                key: nanoid(),
                 title: formData.title,
                 description: formData.description,
                 Images: FormImages
