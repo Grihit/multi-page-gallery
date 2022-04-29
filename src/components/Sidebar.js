@@ -19,17 +19,30 @@ export default function Sidebar(props) {
   });
   return (
     <Flex
-      minH={"calc(100vh - 80px)"}
+      maxH={"calc(100vh - 80px)"}
       overflowY={"auto"}
       minW={"17vw"}
       maxW={'20vw'}
       boxShadow={"15px 0px 34px -19px rgba(57,192,186,0.2)"}
       flexDir={"column"}
+      scrollBehavior={'smooth'}
+      css={{
+        '&::-webkit-scrollbar': {
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          width: '6px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            background: 'rgb(199, 199, 199)',
+          borderRadius: '24px',
+        },
+      }}
     >
       <Text p={"15px"} fontSize={"1.6vw"} fontWeight={"500"}>
         Collections
       </Text>
-      <Tabs orientation={"vertical"}>
+      <Tabs orientation={"vertical"} defaultIndex={props.index}>
         <TabList width={"full"}>
           {collectionElements}
         </TabList>

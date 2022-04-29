@@ -1,6 +1,7 @@
 import * as actionTypes from "./actions";
 
 const initialState = {
+  collection: null,
   collections: [],
 };
 
@@ -14,6 +15,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         updatedCollections,
       };
+    }
+    case actionTypes.CURRENT_COLLECTION: {
+      let currentCollection = state.collection
+      currentCollection = action.currentCollection
+      return {
+        ...state,
+        currentCollection,
+      }
     }
     default:
       return state;

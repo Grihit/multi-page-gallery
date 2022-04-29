@@ -23,6 +23,7 @@ export default function Home() {
 
     const collections = useSelector(state => state.collections)
     const { isOpen, onOpen, onClose } = useDisclosure()
+    
 
     return (
         <Flex
