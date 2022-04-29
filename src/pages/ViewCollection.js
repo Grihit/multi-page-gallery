@@ -21,12 +21,13 @@ export default function ViewCollection() {
             return collection?.key === currentCollectionKey
         })
         setIndex(collections.indexOf(newCurrentCollection))
+        console.log(newCurrentCollection, currentCollection, index)
 
         dispatch({
             type: actionTypes.CURRENT_COLLECTION,
             currentCollection: newCurrentCollection,
         })
-    },[currentCollectionKey])
+    },[currentCollectionKey, collections])
     return (
         <div>
             <Navbar />

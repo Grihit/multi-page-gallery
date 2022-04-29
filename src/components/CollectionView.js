@@ -24,6 +24,7 @@ import * as actionTypes from "../store/actions";
 import "antd/dist/antd.min.css";
 import { message } from "antd";
 import UploadImage from "./UploadImage";
+import ImgOpen from "./ImgOpen";
 
 export default function CollectionView() {
   const dispatch = useDispatch();
@@ -48,6 +49,11 @@ export default function CollectionView() {
       collectionIndex: collectionIndex,
     });
   }
+  const [currentImg, setCurrentImg] = React.useState("") 
+  function imgClick(img){
+    setCurrentImg(img)
+    // ImgOnOpen()
+  }
   React.useEffect(() => {
     setImgElements(
       collection.Images.map((img, imgIndex) => {
@@ -66,6 +72,7 @@ export default function CollectionView() {
               objectFit={"cover"}
               h={"full"}
               cursor={"pointer"}
+              onClick={() => imgClick(img)}
             />
             {imgHover === imgIndex && (
               <DeleteIcon
@@ -106,7 +113,6 @@ export default function CollectionView() {
   }
 
   function change(value) {
-    console.log(value);
     if (value === "title") {
       setEditCollection((prevEditCollection) => {
         return {
@@ -152,6 +158,7 @@ export default function CollectionView() {
     onClose()
   }
   const { isOpen, onOpen, onClose } = useDisclosure();
+  
   return (
     <form style={{ width: "100%" }} onSubmit={handleSubmit}>
       <Flex
@@ -291,6 +298,8 @@ export default function CollectionView() {
           {imgElements}
         </Grid>
       </Flex>
+      <ImgOpen image = {currentImg} isOpen={!!currentImg} onClose={()=>setCurrentImg("")}/>
+
     </form>
   );
 }
