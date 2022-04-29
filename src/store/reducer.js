@@ -1,7 +1,7 @@
 import * as actionTypes from "./actions";
 
 const initialState = {
-  currentCollection: [],
+  currentCollection: null,
   collections: [],
 };
 
@@ -23,23 +23,20 @@ const reducer = (state = initialState, action) => {
     }
     case actionTypes.EDIT_COLLECTION: {
       let newCollections = state.collections
-      let currentCollection = state.collection
-      const prevCollection = newCollections.find(c => {
-        return c.key === action.key
-      })
-      const index = newCollections.indexOf(prevCollection)
+      let currentCollection = state.currentCollection
+      const index = action.index
+      console.log(index)
       newCollections[index] = {
-        ...newCollections,
+        ...newCollections[index],
         title: action.title,
         description: action.description,
         Images: action.Images,
-
       }
       currentCollection = newCollections[index]
       return {
         ...state,
-        currentCollection,
-        newCollections,
+        currentCollection: currentCollection,
+        collections: newCollections,
       }
 
     }

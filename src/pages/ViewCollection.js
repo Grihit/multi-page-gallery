@@ -31,7 +31,7 @@ export default function ViewCollection() {
         <div>
             <Navbar />
             <Flex>
-            <Sidebar setCurrentCollectionKey={setCurrentCollectionKey} index={index>-1? index : 0}/>
+            <Sidebar setCurrentCollectionKey={setCurrentCollectionKey} index={index}/>
             <CollectionView/>
             </Flex>
         </div>
