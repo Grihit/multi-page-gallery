@@ -4,28 +4,39 @@ import {
   Text,
   Grid,
   GridItem,
-  Img,
+  Image,
   Input,
   IconButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  ModalFooter,
+  Button,
 } from "@chakra-ui/react";
-import { CheckIcon, EditIcon } from "@chakra-ui/icons";
+import { CheckIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionTypes from "../store/actions";
 import "antd/dist/antd.min.css";
 import { message } from "antd";
+import UploadImage from "./UploadImage";
 
 export default function CollectionView() {
   const dispatch = useDispatch();
   const collections = useSelector((state) => state.collections);
   const collection = useSelector((state) => state.currentCollection);
   const [imgElements, setImgElements] = React.useState("");
+  const [newImages, setNewImages] = React.useState([]);
   React.useEffect(() => {
     setImgElements(
-      collection.Images.map((img) => {
+      collection.Images.map((img,imgIndex) => {
         return (
-          <GridItem key={nanoid()}>
-            <Img src={img.thumbUrl} alt={img.name} w={"full"} />
+          <GridItem key={nanoid()} w={'100%'}>
+            <Image src={img.thumbUrl} alt={img.name} w={"full"} objectFit={'cover'} h={'full'} />
           </GridItem>
         );
       })
@@ -59,32 +70,44 @@ export default function CollectionView() {
           [value]: !prevEditCollection.title,
         };
       });
-    }
-    else if(value === "description"){
-        setEditCollection((prevEditCollection) => {
-            return {
-              ...prevEditCollection,
-              [value]: !prevEditCollection.description,
-            };
-          });
+    } else if (value === "description") {
+      setEditCollection((prevEditCollection) => {
+        return {
+          ...prevEditCollection,
+          [value]: !prevEditCollection.description,
+        };
+      });
     }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     const index = collections.indexOf(collection);
-    if (newCollection.title.length < 1 || newCollection.description.length < 1 || newCollection.Images.length < 1){
-        message.error('Make sure Collection name, description and images are not empty')
-        return;
+    if (
+      newCollection.title.length < 1 ||
+      newCollection.description.length < 1 ||
+      newCollection.Images.length < 1
+    ) {
+      message.error(
+        "Make sure Collection name, description and images are not empty"
+      );
+      return;
     }
+    const updatedNewCollection = {
+        ...newCollection,
+        Images: newCollection.Images.concat(newImages)
+    }
+    setNewCollection(updatedNewCollection)
+    setNewImages([])
     dispatch({
       type: actionTypes.EDIT_COLLECTION,
       index: index,
-      title: newCollection.title,
-      description: newCollection.description,
-      Images: newCollection.Images,
+      title: updatedNewCollection.title,
+      description: updatedNewCollection.description,
+      Images: updatedNewCollection.Images,
     });
   }
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <form style={{ width: "100%" }} onSubmit={handleSubmit}>
       <Flex
@@ -108,7 +131,7 @@ export default function CollectionView() {
       >
         {!editCollection.title ? (
           <Flex alignItems={"center"} gap={"30px"}>
-            <Text fontSize={"3vw"} fontWeight={"500"} display={'inline-block'}>
+            <Text fontSize={"3vw"} fontWeight={"500"} display={"inline-block"}>
               {collection.title}
             </Text>
             <IconButton
@@ -128,19 +151,19 @@ export default function CollectionView() {
               placeholder={"Enter New Collection Name"}
               value={newCollection.title}
               onChange={handleInputChange}
-              marginBottom={'10px'}
+              marginBottom={"10px"}
             ></Input>
             <IconButton
               icon={<CheckIcon />}
               bg={"rgba(64, 206, 199, 0.764)"}
               color={"#FFFFFF"}
-              size={'md'}
+              size={"md"}
               onClick={() => change("title")}
             />
           </Flex>
         )}
         {!editCollection.description ? (
-          <Flex alignItems={"center"} gap={"30px"} marginTop={'15px'}>
+          <Flex alignItems={"center"} gap={"30px"} marginTop={"15px"}>
             <Text fontSize={"2vw"} display={"inline-block"}>
               {collection.description}
             </Text>
@@ -148,7 +171,7 @@ export default function CollectionView() {
               icon={<EditIcon />}
               bg={"rgba(64, 206, 199, 0.764)"}
               color={"#FFFFFF"}
-              size={'xs'}
+              size={"xs"}
               onClick={() => change("description")}
               type={"submit"}
             />
@@ -171,6 +194,49 @@ export default function CollectionView() {
             />
           </Flex>
         )}
+        <Button
+          colorScheme={"teal"}
+          size={"md"}
+          leftIcon={<AddIcon />}
+          onClick={onOpen}
+          w={'150px'}
+          minH={'40px'}
+          marginLeft={'auto'}
+          marginRight={'30px'}
+        >
+          Add Images
+        </Button>
+        <Modal isOpen={isOpen} onClose={onClose} size={"2xl"}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader fontSize={"2xl"} color={"#39c0ba"}>
+              Add Images
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <UploadImage fileList={newImages} setFileList={setNewImages} />
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                colorScheme={"teal"}
+                size={"lg"}
+                type={"submit"}
+                marginLeft={"auto"}
+                onClick={handleSubmit}
+              >
+                Add
+              </Button>
+              <Button
+                colorScheme={"teal"}
+                size={"lg"}
+                variant={"ghost"}
+                onClick={onClose}
+              >
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
         <Grid
           templateColumns={"repeat(4, 1fr)"}
           gap={"30px"}

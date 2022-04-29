@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
       let newCollections = state.collections
       let currentCollection = state.currentCollection
       const index = action.index
-      console.log(index)
+      //console.log(index)
       newCollections[index] = {
         ...newCollections[index],
         title: action.title,
