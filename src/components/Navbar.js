@@ -1,17 +1,20 @@
 import React from "react";
 import {
     Box,
-    Flex, 
+    Flex,
+    useColorModeValue 
 } from '@chakra-ui/react'
 import {
     Link as RouterLink, 
 } from "react-router-dom"
+import ToggleDarkMode from "./ToggleDarkMode";
+
 
 export default function Navbar() {
   return (
     <Box>
         <Flex 
-            bg={'gray.50'} 
+            bg={useColorModeValue('gray.50', 'gray.800')} 
             w={'full'} 
             minH={'80px'}
             alignItems={'center'}
@@ -20,7 +23,8 @@ export default function Navbar() {
         >
             <RouterLink to="/">
                 <img src="https://www.disecto.com/static/media/logo.244765c6.svg" alt="Disecto logo" /> 
-            </RouterLink> 
+            </RouterLink>
+            <ToggleDarkMode /> 
         </Flex>
     </Box>
   );

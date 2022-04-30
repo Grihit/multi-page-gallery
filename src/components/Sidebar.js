@@ -86,6 +86,7 @@ export default function Sidebar(props) {
     <Flex
       pos={"relative"}
       maxH={"calc(100vh - 80px)"}
+      minH={"calc(100vh - 80px)"}
       overflowY={"auto"}
       minW={"17vw"}
       maxW={"20vw"}

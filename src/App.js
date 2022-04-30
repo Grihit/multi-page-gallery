@@ -1,14 +1,23 @@
-import React from 'react'
-import Navbar from './components/Navbar'
-import Home from './components/Home';
-import './App.css';
+import React from "react";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import {
+  ThemeProvider,
+  theme,
+  ColorModeProvider,
+  CSSReset,
+} from "@chakra-ui/react";
+import "./App.css";
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <Home />
-    </div>
+    <ThemeProvider theme={theme}>
+      <ColorModeProvider>
+        <CSSReset />
+        <Navbar />
+        <Home />
+      </ColorModeProvider>
+    </ThemeProvider>
   );
 }
 
