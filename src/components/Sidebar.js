@@ -12,16 +12,19 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  IconButton
+  IconButton,
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 import * as actionTypes from "../store/actions";
 import AddCollectionForm from "./AddCollectionForm";
+import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 export default function Sidebar(props) {
   const collections = useSelector((state) => state.collections);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleClick(collection) {
     dispatch({
@@ -30,8 +33,25 @@ export default function Sidebar(props) {
     });
   }
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
-  const collectionElements = collections.map((collection) => {
+  const [collectionDeleteIndex, setCollectionDeleteIndex] = React.useState("");
+
+  function toggleDelete(index) {
+    setCollectionDeleteIndex(index);
+  }
+
+  function collectionDelete(collection) {
+    const collectionIndex = collections.indexOf(collection);
+    dispatch({
+      type: actionTypes.DELETE_COLLECTION,
+      collectionIndex: collectionIndex,
+    });
+    if (collections.length === 0) navigate("/");
+    else {
+      window.location.reload();
+    }
+  }
+
+  const collectionElements = collections.map((collection, index) => {
     return (
       <Tab
         justifyContent={"flex-start"}
@@ -41,13 +61,30 @@ export default function Sidebar(props) {
         _selected={{ color: "#FFFFFF", bg: "#39c0ba" }}
         key={collection.key}
         onClick={() => handleClick(collection)}
+        onMouseEnter={() => toggleDelete(index)}
+        onMouseLeave={() => toggleDelete("")}
+        pos={"relative"}
       >
+        {index === collectionDeleteIndex && (
+          <DeleteIcon
+            color={"black"}
+            w={7}
+            h={7}
+            p={"3px"}
+            pos={"absolute"}
+            top={"10px"}
+            right={"2px"}
+            onClick={() => collectionDelete(collection)}
+            cursor={"pointer"}
+          />
+        )}
         {collection.title}
       </Tab>
     );
   });
   return (
     <Flex
+      pos={"relative"}
       maxH={"calc(100vh - 80px)"}
       overflowY={"auto"}
       minW={"17vw"}
@@ -68,21 +105,31 @@ export default function Sidebar(props) {
         },
       }}
     >
-        <Modal isOpen={isOpen} onClose={onClose} size={"2xl"}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader fontSize={"2xl"} color={"#39c0ba"}>
-              Add Collection
-            </ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <AddCollectionForm close={onClose} />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+      <Modal isOpen={isOpen} onClose={onClose} size={"2xl"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader fontSize={"2xl"} color={"#39c0ba"}>
+            Add Collection
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <AddCollectionForm close={onClose} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
       <Text p={"15px"} fontSize={"1.6vw"} fontWeight={"500"}>
-        Collections 
-        {/* {<IconButton icon={<AddIcon />} onClick={onOpen} cursor={'pointer'}/>} */}
+        Collections
+        <IconButton
+          icon={<AddIcon />}
+          onClick={onOpen}
+          cursor={"pointer"}
+          marginLeft={"auto"}
+          bg={"#39c0ba"}
+          color={"white"}
+          pos={"absolute"}
+          right={"10px"}
+          opacity={".75"}
+        />
       </Text>
       <Tabs orientation={"vertical"} defaultIndex={props.index}>
         <TabList width={"full"}>{collectionElements}</TabList>

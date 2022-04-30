@@ -45,10 +45,26 @@ const reducer = (state = initialState, action) => {
       const imgIndex = action.imgIndex
       const collectionIndex = action.collectionIndex
       newCollections[collectionIndex].Images.splice(imgIndex,1)
-      console.log(newCollections)
       return{
         ...state,
         currentCollection: newCollections[collectionIndex],
+        collections: newCollections,
+      }
+    }
+    case actionTypes.DELETE_COLLECTION: {
+      let newCollections = state.collections
+      let currentCollection = state.currentCollection
+      const collectionIndex = action.collectionIndex
+      newCollections.splice(collectionIndex,1)
+      if(newCollections.length === 0){ 
+        currentCollection = null
+      }
+      else{
+        currentCollection = newCollections[0]
+      }
+      return{
+        ...state,
+        currentCollection: currentCollection,
         collections: newCollections,
       }
     }

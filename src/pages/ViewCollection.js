@@ -16,12 +16,12 @@ export default function ViewCollection() {
     const [index,setIndex] = React.useState(collections.indexOf(currentCollection))
     const [currentCollectionKey, setCurrentCollectionKey] = React.useState(currentCollection?.key)
 
+
     React.useEffect(() => {
         const newCurrentCollection = collections.find(collection => {
             return collection?.key === currentCollectionKey
         })
         setIndex(collections.indexOf(newCurrentCollection))
-        console.log(newCurrentCollection, currentCollection, index)
 
         dispatch({
             type: actionTypes.CURRENT_COLLECTION,
@@ -32,7 +32,7 @@ export default function ViewCollection() {
         <div>
             <Navbar />
             <Flex>
-            <Sidebar setCurrentCollectionKey={setCurrentCollectionKey} index={index}/>
+            <Sidebar setCurrentCollectionKey={setCurrentCollectionKey} index={index? index : 0} />
             <CollectionView/>
             </Flex>
         </div>

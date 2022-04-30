@@ -29,7 +29,7 @@ import ImgOpen from "./ImgOpen";
 export default function CollectionView() {
   const dispatch = useDispatch();
   const collections = useSelector((state) => state.collections);
-  const collection = useSelector((state) => state.currentCollection);
+  let collection = useSelector((state) => state.currentCollection);
   const [imgElements, setImgElements] = React.useState("");
   const [newImages, setNewImages] = React.useState([]);
   const [imgHover, setImgHover] = React.useState("");
@@ -158,6 +158,9 @@ export default function CollectionView() {
     onClose()
   }
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  if(!collection)
+    collection=collections[0]
   
   return (
     <form style={{ width: "100%" }} onSubmit={handleSubmit}>
