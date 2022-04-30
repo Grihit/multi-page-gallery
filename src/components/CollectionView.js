@@ -42,7 +42,7 @@ export default function CollectionView() {
         message.error('Collection must have atleast 1 image!')
         return
     }
-    message.success('Deleting Image')
+    message.success('Image Deleted')
     dispatch({
       type: actionTypes.DELETE_IMAGE,
       imgIndex: imgIndex,
@@ -52,7 +52,6 @@ export default function CollectionView() {
   const [currentImg, setCurrentImg] = React.useState("") 
   function imgClick(img){
     setCurrentImg(img)
-    // ImgOnOpen()
   }
   React.useEffect(() => {
     setImgElements(
