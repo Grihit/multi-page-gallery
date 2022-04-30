@@ -1,13 +1,11 @@
 import React from "react";
 import {
     Box,
-    Flex,
-    // useColorModeValue 
+    Flex, 
 } from '@chakra-ui/react'
 import {
     Link as RouterLink, 
 } from "react-router-dom"
-// import ToggleDarkMode from "./ToggleDarkMode";
 
 
 export default function Navbar() {
@@ -24,7 +22,6 @@ export default function Navbar() {
             <RouterLink to="/">
                 <img src="https://www.disecto.com/static/media/logo.244765c6.svg" alt="Disecto logo" /> 
             </RouterLink>
-            {/* <ToggleDarkMode />  */}
         </Flex>
     </Box>
   );

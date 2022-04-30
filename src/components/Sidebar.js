@@ -19,7 +19,6 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actionTypes from "../store/actions";
 import AddCollectionForm from "./AddCollectionForm";
 import { useNavigate } from "react-router-dom";
-import { message } from "antd";
 
 export default function Sidebar(props) {
   const collections = useSelector((state) => state.collections);
