@@ -8,6 +8,8 @@ import ViewCollection from './pages/ViewCollection';
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import reducer from './store/reducer'
+// import { ColorModeScript } from "@chakra-ui/react";
+// import theme from './theme';
 
 import {
   BrowserRouter as Router,
@@ -56,9 +58,10 @@ store.subscribe(() => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const routing = (
   <Provider store={store}>
-    <ChakraProvider>  
+      {/* <ColorModeScript initialColorMode={theme.config.initialColorMode} />      */}
+    <ChakraProvider>
       <Router>  
-        <Routes>   
+        <Routes>
           <Route exact path="/" element={<App />} />     
           <Route path="/ViewCollection" element={<ViewCollection />} />    
         </Routes>  
