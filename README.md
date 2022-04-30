@@ -1,6 +1,5 @@
 A multi page gallery that lets the user add, edit and remove collections. Made for a task given by Disecto
 # Problem Statement
-
 1. Create a new collection with the following fields:
         a. Name of the collection
         b. Description
@@ -18,7 +17,27 @@ React Redux should be used for state management
 
 # Functioning of Web App
 1. Landing page
+![Landing Page](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/Landing%20Page.PNG?raw=true)
 
+2. User can then add a collection by clicking on the Add Collection button. An error is shown if any of the 3 fields are left empty
+![Add Collection](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/Add%20Collection.PNG?raw=true)
+
+![Entering Data](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/Entering%20Data.PNG?raw=true)
+
+3. User is then redirected to view collections page which shows the current collection created.
+![View Collection](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/View%20Collection.PNG?raw=true)
+
+4. User can edit the name of collection, description of collection and can also add new images. An error message is shown if the user leaves name or description field empty
+![Editing Name](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/Editing%20Collection%20Name.PNG?raw=true)
+![Editing Description](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/Editing%20Collection%20Description.PNG?raw=true)
+![Adding Images](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/Adding%20Images.PNG?raw=true)
+
+5. The user can delete any image they want. If they try to delete the last image, an error message is shown.
+![Deleting Image](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/Image%20Deleted.PNG?raw=true)
+![After Deleting](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/After%20Deletion.PNG?raw=true)
+
+6. The user can delete any of the collections they have created. If the last collection is deleted, the user is redirected to the landing page with the view collections button disabled
+![Deleting Collection](https://github.com/Grihit/multi-page-gallery/blob/master/public/images/Deleting%20Collection.PNG?raw=true)
 
 # Getting Started with Create React App
 
