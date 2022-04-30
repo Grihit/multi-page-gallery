@@ -62,7 +62,10 @@ export default function AddCollectionForm(props) {
     if (isError.title) setErrorMsg("Collection name is required");
     else if (isError.description)
       setErrorMsg("Collection description is required");
-    else if (FormImages.length < 1) setErrorMsg("No Image Uploaded");
+    else if (FormImages.length < 1) {
+      setErrorMsg("No Image Uploaded");
+      return
+    }
     else setErrorMsg("");
     if (!isError.title && !isError.description) {
       const collection = {
@@ -131,7 +134,7 @@ export default function AddCollectionForm(props) {
           type={"submit"}
           marginLeft={"auto"}
           onClick={
-            !isError.title && !isError.description
+            !isError.title && !isError.description && FormImages.length > 0
               ? props.close
               : () => void undefined
           }
