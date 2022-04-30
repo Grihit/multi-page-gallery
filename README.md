@@ -1,3 +1,25 @@
+A multi page gallery that lets the user add, edit and remove collections. Made for a task given by Disecto
+# Problem Statement
+
+1. Create a new collection with the following fields:
+        a. Name of the collection
+        b. Description
+        c. Images in the collection
+2. After the Creation of the collection, the user should be redirected to the
+dashboard listing the new collection created.
+3. On click of the collection, you should be redirected to the route of that specific
+collection where you can view the content with the specified fields.
+4. You should be able to edit the collection.
+5. You can delete the collection that you create.
+6. Make sure that while creating your collection, fields should not remain empty
+i.e., there should be form validation in it with an appropriate message.
+
+React Redux should be used for state management
+
+# Functioning of Web App
+1. Landing page
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
