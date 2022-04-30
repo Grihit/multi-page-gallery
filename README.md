@@ -1,4 +1,4 @@
-A multi page gallery that lets the user add, edit and remove collections. Made for a task given by Disecto
+#### A multi page gallery that lets the user add, edit and remove collections. Made for a task given by Disecto
 # Problem Statement
 1. Create a new collection with the following fields:
         a. Name of the collection
